@@ -4,6 +4,7 @@ import com.example.zoo.api.mappers.WolfDtoToWolfMapper;
 import com.example.zoo.api.mappers.WolfToWolfDtoMapper;
 import com.example.zoo.api.models.WolfDto;
 import com.example.zoo.controllers.WolfController;
+import com.example.zoo.domain.Tiger;
 import com.example.zoo.domain.Wolf;
 import com.example.zoo.repositories.WolfRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,7 +92,9 @@ public class WolfServiceImpl implements WolfService {
 
                     }
 
-                    WolfDto returnDto = wolfToWolfDtoMapper.map(wolf);
+                    Wolf savedWolf = wolfRepository.save(wolf);
+
+                    WolfDto returnDto = wolfToWolfDtoMapper.map(savedWolf);
                     returnDto.setWolfUrl(getWolfUrl(id));
                     return returnDto;
                 }).orElseThrow(RuntimeException::new);

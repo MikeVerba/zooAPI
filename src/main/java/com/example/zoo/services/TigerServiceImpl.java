@@ -89,7 +89,10 @@ public class TigerServiceImpl implements TigerService {
 
                     }
 
-                    TigerDto returnDto = tigerToTigerDtoMapper.map(tiger);
+                    Tiger savedTiger = tigerRepository.save(tiger);
+
+
+                    TigerDto returnDto = tigerToTigerDtoMapper.map(savedTiger);
                     returnDto.setTigerUrl(getTigerUrl(id));
                     return returnDto;
                 }).orElseThrow(RuntimeException::new);

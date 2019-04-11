@@ -93,7 +93,9 @@ public class BearServiceImpl implements BearService {
 
                     }
 
-                    BearDto returnDto = bearToBearDtoMapper.map(bear);
+                    Bear savedBear = bearRepository.save(bear);
+
+                    BearDto returnDto = bearToBearDtoMapper.map(savedBear);
                     returnDto.setBearUrl(getBearUrl(id));
                     return returnDto;
                 }).orElseThrow(RuntimeException::new);

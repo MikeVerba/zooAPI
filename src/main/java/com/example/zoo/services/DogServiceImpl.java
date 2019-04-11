@@ -87,7 +87,10 @@ public class DogServiceImpl implements DogService {
 
                     }
 
-                    DogDto returnDto = dogToDogDtoMapper.map(dog);
+                    Dog savedDog = dogRepository.save(dog);
+
+                    DogDto returnDto = dogToDogDtoMapper.map(savedDog);
+
                     returnDto.setDogUrl(getDogUrl(id));
                     return returnDto;
                 }).orElseThrow(RuntimeException::new);
